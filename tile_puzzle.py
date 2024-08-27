@@ -1,8 +1,30 @@
 import random
 tiles = [1, 2, 3, 4, 5, 6, 7, 8, 0]
-random.shuffle(tiles)
-random_list = tiles
-tile_map = [tiles[:3], tiles[3:6], tiles[6:9]]
+tile_map = []
+
+
+def Randomize_map(tiles):
+    random.shuffle(tiles)
+    tile_map = [tiles[:3], tiles[3:6], tiles[6:9]]
+    Check_solvable(tiles)
+    return tile_map
+
+
+def Check_solvable(tiles):
+    inversions = 0
+    for num in tiles:
+        if num == 0:
+            continue
+        for num2 in tiles:
+            if num2 == num or num2 == 0:
+                continue
+            if num2 < num:
+                inversions += 1
+    if inversions % 2 != 0:
+        Randomize_map(tiles)
+
+
+tile_map = Randomize_map(tiles)
 tile_to_move = 0
 blank_coords = [0], [0]
 tile_coords = [0], [0]
