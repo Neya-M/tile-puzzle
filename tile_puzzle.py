@@ -41,7 +41,11 @@ while tile_map != [[1, 2, 3], [4, 5, 6], [7, 8, 0]]:
     print(str(tile_map[0]) + "\n" +
           str(tile_map[1]) + "\n" +
           str(tile_map[2]))
-    tile_to_move = int(input("enter the tile you want to move: "))
+    try:
+        tile_to_move = int(input("enter the tile you want to move: "))
+    except ValueError:
+        print("Error: Not an integer")
+        continue
     blank_coords = find_index(tile_map, 0)
     tile_coords = find_index(tile_map, tile_to_move)
     if tile_coords is None:
